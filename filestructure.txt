@@ -1,0 +1,35 @@
+|-- .gitignore
+|-- eslint.config.js
+|-- index.html
+|-- package-lock.json
+|-- package.json
+|-- postcss.config.js
+|-- public
+    |-- favicon.svg
+    |-- icons.svg
+|-- quiz
+|-- README.md
+|-- src
+    |-- App.css
+    |-- App.jsx
+    |-- assets
+        |-- hero.png
+        |-- react.svg
+        |-- vite.svg
+    |-- components
+        |-- Button.jsx
+        |-- InputField.jsx
+        |-- OptionItem.jsx
+        |-- po.jsx
+        |-- QuestionCard.jsx
+        |-- Timer.jsx
+    |-- data
+        |-- questions.js
+    |-- index.css
+    |-- main.jsx
+    |-- pages
+        |-- Home.jsx
+        |-- Quiz.jsx
+        |-- Success.jsx
+|-- tailwind.config.js
+|-- vite.config.js
