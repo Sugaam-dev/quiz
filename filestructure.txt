@@ -19,8 +19,8 @@
     |-- components
         |-- Button.jsx
         |-- InputField.jsx
+        |-- OptionImageCard.jsx
         |-- OptionItem.jsx
-        |-- po.jsx
         |-- QuestionCard.jsx
         |-- Timer.jsx
     |-- data
