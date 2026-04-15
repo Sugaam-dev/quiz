@@ -4,24 +4,29 @@ import OptionImageCard from "./OptionImageCard";
 /**
  * QuestionCard
  *
- * Handles three question layouts automatically:
- *   1. Text only question + text options
- *   2. Image question + text options
- *   3. Any question + image options (renders a 2-col image grid)
- *   4. Image question + image options (both)
- *
- * question shape:
- * {
- *   id: number,
- *   question: string,
- *   image?: string | null,      ← image URL for the question itself
- *   options: [
- *     { id: string, text: string, image?: string | null }
- *   ]
- * }
+ * Props:
+ *   question      — { id, question, image, options: [{ id, text, image }] }
+ *   questionNumber — display number
+ *   selected      — string (single) OR string[] (multi-select)
+ *   onSelect      — fn(optionId)
+ *   isMultiSelect — boolean
  */
-const QuestionCard = ({ question, questionNumber, selected, onSelect }) => {
+const QuestionCard = ({
+  question,
+  questionNumber,
+  selected,
+  onSelect,
+  isMultiSelect = false,
+}) => {
   const hasImageOptions = question.options.some((o) => o.image);
+
+  // Normalize selected to always work as array for checking
+  const isSelected = (optId) => {
+    if (isMultiSelect) {
+      return Array.isArray(selected) && selected.includes(optId);
+    }
+    return selected === optId;
+  };
 
   return (
     <div
@@ -34,7 +39,7 @@ const QuestionCard = ({ question, questionNumber, selected, onSelect }) => {
         marginBottom: "1.25rem",
       }}
     >
-      {/* Question number label */}
+      {/* Question number */}
       <p
         style={{
           fontSize: "11px",
@@ -48,7 +53,7 @@ const QuestionCard = ({ question, questionNumber, selected, onSelect }) => {
         Question {questionNumber}
       </p>
 
-      {/* Optional question image */}
+      {/* Question image */}
       {question.image && (
         <img
           src={question.image}
@@ -58,8 +63,9 @@ const QuestionCard = ({ question, questionNumber, selected, onSelect }) => {
             borderRadius: "8px",
             marginBottom: "1.25rem",
             border: "1px solid #ECEAE4",
-            objectFit: "cover",
-            maxHeight: "220px",
+            objectFit: "contain", // ← was "cover", now "contain"
+            maxHeight: "300px", // ← was 220px, now 300px
+            background: "#F4F3EF", // ← light bg so transparent images look clean
           }}
         />
       )}
@@ -77,7 +83,7 @@ const QuestionCard = ({ question, questionNumber, selected, onSelect }) => {
         {question.question}
       </p>
 
-      {/* Options — image grid or list */}
+      {/* Options */}
       {hasImageOptions ? (
         <div
           style={{
@@ -91,7 +97,7 @@ const QuestionCard = ({ question, questionNumber, selected, onSelect }) => {
               key={opt.id}
               option={opt}
               index={i}
-              selected={selected === opt.id}
+              selected={isSelected(opt.id)}
               onSelect={onSelect}
             />
           ))}
@@ -103,7 +109,7 @@ const QuestionCard = ({ question, questionNumber, selected, onSelect }) => {
               key={opt.id}
               option={opt}
               index={i}
-              selected={selected === opt.id}
+              selected={isSelected(opt.id)}
               onSelect={onSelect}
             />
           ))}

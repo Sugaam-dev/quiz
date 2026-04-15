@@ -1,15 +1,5 @@
-const LETTERS = ["A", "B", "C", "D", "E"];
+const LETTERS = ["A", "B", "C", "D", "E", "F", "G", "H", "I"]; // ← was only 5
 
-/**
- * OptionItem — used inside QuestionCard for text-based options.
- * For image-grid options, QuestionCard renders OptionImageCard instead.
- *
- * Props:
- *   option  — { id, text, image? }
- *   index   — 0-based index for the letter badge
- *   selected — boolean
- *   onSelect — fn(optionId)
- */
 const OptionItem = ({ option, index = 0, selected, onSelect }) => {
   return (
     <div
@@ -61,8 +51,8 @@ const OptionItem = ({ option, index = 0, selected, onSelect }) => {
               borderRadius: "6px",
               marginTop: "8px",
               border: "1px solid #ECEAE4",
-              objectFit: "cover",
-              maxHeight: "100px",
+              objectFit: "contain",       // ← was "cover", now "contain" so nothing gets cut
+              maxHeight: "160px",
             }}
           />
         )}

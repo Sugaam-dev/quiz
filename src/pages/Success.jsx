@@ -3,20 +3,22 @@ import Button from "../components/Button";
 /**
  * Success
  * Props:
- *   answers      — { [questionId]: selectedOptionId }
- *   totalCount   — total number of questions
- *   correctCount — number of correct answers
- *   onRetry      — callback to restart the quiz
+ *   result   — { user_name, total_marks, obtained_marks, percentage }
+ *   onRetry  — callback to restart the quiz
  */
-const Success = ({ correctCount = 0, totalCount = 0, onRetry }) => {
-  const percent = Math.round((correctCount / totalCount) * 100);
+const Success = ({ result, onRetry }) => {
+  // Fallback to 0 if result is missing
+  const obtainedMarks = result?.obtained_marks ?? 0;
+  const totalMarks    = result?.total_marks    ?? 0;
+  const percentage    = result?.percentage     ?? 0;
+  const userName      = result?.user_name      ?? "Student";
 
   const message =
-    correctCount === totalCount
+    percentage === 100
       ? "Perfect score — outstanding!"
-      : percent >= 70
-      ? `${correctCount} of ${totalCount} correct — well done!`
-      : `${correctCount} of ${totalCount} correct — keep practising!`;
+      : percentage >= 70
+      ? `Great job, ${userName}!`
+      : `Keep practising, ${userName}!`;
 
   return (
     <div
@@ -68,6 +70,7 @@ const Success = ({ correctCount = 0, totalCount = 0, onRetry }) => {
           </svg>
         </div>
 
+        {/* Title */}
         <h2
           style={{
             fontFamily: "'DM Serif Display', serif",
@@ -82,7 +85,53 @@ const Success = ({ correctCount = 0, totalCount = 0, onRetry }) => {
           All your responses have been recorded. Here's how you did.
         </p>
 
-        {/* Score chip */}
+        {/* Percentage circle */}
+        <div
+          style={{
+            width: "90px",
+            height: "90px",
+            borderRadius: "50%",
+            background: percentage >= 70 ? "#EFF6ED" : "#FEF3F2",
+            border: `3px solid ${percentage >= 70 ? "#2D6A2A" : "#B5373A"}`,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            margin: "0 auto 1.25rem",
+          }}
+        >
+          <span style={{ fontSize: "22px", fontWeight: 700, color: "#1C1B18" }}>
+            {Math.round(percentage)}%
+          </span>
+        </div>
+
+        {/* Score breakdown */}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            gap: "24px",
+            marginBottom: "1.5rem",
+          }}
+        >
+          <div style={{ textAlign: "center" }}>
+            <p style={{ fontSize: "20px", fontWeight: 700, color: "#1C1B18", margin: 0 }}>
+              {obtainedMarks}
+            </p>
+            <p style={{ fontSize: "12px", color: "#9A9890", margin: 0 }}>Obtained</p>
+          </div>
+
+          <div style={{ width: "1px", background: "#ECEAE4" }} />
+
+          <div style={{ textAlign: "center" }}>
+            <p style={{ fontSize: "20px", fontWeight: 700, color: "#1C1B18", margin: 0 }}>
+              {totalMarks}
+            </p>
+            <p style={{ fontSize: "12px", color: "#9A9890", margin: 0 }}>Total</p>
+          </div>
+        </div>
+
+        {/* Message chip */}
         <div
           style={{
             display: "inline-flex",
@@ -92,7 +141,7 @@ const Success = ({ correctCount = 0, totalCount = 0, onRetry }) => {
             border: "1px solid #ECEAE4",
             borderRadius: "8px",
             padding: "10px 18px",
-            fontSize: "15px",
+            fontSize: "14px",
             fontWeight: 600,
             color: "#1C1B18",
             marginBottom: "1.75rem",

@@ -10,6 +10,9 @@
 |-- quiz
 |-- README.md
 |-- src
+    |-- api
+        |-- api.js
+        |-- quizApi.js
     |-- App.css
     |-- App.jsx
     |-- assets

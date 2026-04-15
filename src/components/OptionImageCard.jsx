@@ -1,15 +1,5 @@
-const LETTERS = ["A", "B", "C", "D", "E"];
+const LETTERS = ["A", "B", "C", "D", "E", "F", "G", "H", "I"]; // ← was only 5
 
-/**
- * OptionImageCard — rendered by QuestionCard when ANY option has an image.
- * Displays options in a 2-column image grid.
- *
- * Props:
- *   option   — { id, text, image? }
- *   index    — 0-based index
- *   selected — boolean
- *   onSelect — fn(optionId)
- */
 const OptionImageCard = ({ option, index = 0, selected, onSelect }) => {
   return (
     <div
@@ -35,7 +25,8 @@ const OptionImageCard = ({ option, index = 0, selected, onSelect }) => {
             width: "100%",
             borderRadius: "6px",
             border: "1px solid #ECEAE4",
-            objectFit: "cover",
+            objectFit: "contain",         // ← was "cover", now "contain"
+            maxHeight: "140px",
           }}
         />
       )}

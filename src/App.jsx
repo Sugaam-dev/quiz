@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { questions } from "./data/questions";
 import Home from "./pages/Home";
 import Quiz from "./pages/Quiz";
 import Success from "./pages/Success";
@@ -7,35 +6,47 @@ import Success from "./pages/Success";
 /**
  * App — top-level state machine
  * Screens: "home" → "quiz" → "success"
+ * 
+ * userName  — entered on Home page, passed to Quiz to start attempt
+ * result    — returned from backend after finishing test
  */
 const App = () => {
-  const [screen, setScreen] = useState("home");
-  const [answers, setAnswers] = useState({});
+  const [screen, setScreen]   = useState("home");
+  const [userName, setUserName] = useState("");
+  const [result, setResult]   = useState(null);
 
-  const correctCount = questions.filter(
-    (q) => answers[q.id] === q.correct
-  ).length;
+  const handleStart = (name) => {
+    setUserName(name);
+    setScreen("quiz");
+  };
 
-  const handleStart = () => setScreen("quiz");
-
-  const handleFinish = (finalAnswers) => {
-    setAnswers(finalAnswers);
+  const handleFinish = (resultData) => {
+    setResult(resultData);
     setScreen("success");
   };
 
   const handleRetry = () => {
-    setAnswers({});
+    setResult(null);
+    setUserName("");
     setScreen("home");
   };
 
   return (
     <>
-      {screen === "home" && <Home onStart={handleStart} />}
-      {screen === "quiz" && <Quiz onFinish={handleFinish} />}
+      {screen === "home" && (
+        <Home onStart={handleStart} />
+      )}
+
+      {screen === "quiz" && (
+        <Quiz
+          userName={userName}
+          onFinish={handleFinish}
+        />
+      )}
+
       {screen === "success" && (
         <Success
-          correctCount={correctCount}
-          totalCount={questions.length}
+          result={result}
           onRetry={handleRetry}
         />
       )}
