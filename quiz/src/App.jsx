@@ -1,30 +1,46 @@
 import { useState } from "react";
+import { questions } from "./data/questions";
 import Home from "./pages/Home";
 import Quiz from "./pages/Quiz";
 import Success from "./pages/Success";
 
-function App() {
-  const [page, setPage] = useState("home");
-  const [user, setUser] = useState("");
+/**
+ * App — top-level state machine
+ * Screens: "home" → "quiz" → "success"
+ */
+const App = () => {
+  const [screen, setScreen] = useState("home");
+  const [answers, setAnswers] = useState({});
+
+  const correctCount = questions.filter(
+    (q) => answers[q.id] === q.correct
+  ).length;
+
+  const handleStart = () => setScreen("quiz");
+
+  const handleFinish = (finalAnswers) => {
+    setAnswers(finalAnswers);
+    setScreen("success");
+  };
+
+  const handleRetry = () => {
+    setAnswers({});
+    setScreen("home");
+  };
 
   return (
     <>
-      {page === "home" && (
-        <Home
-          onStart={(name) => {
-            setUser(name);
-            setPage("quiz");
-          }}
+      {screen === "home" && <Home onStart={handleStart} />}
+      {screen === "quiz" && <Quiz onFinish={handleFinish} />}
+      {screen === "success" && (
+        <Success
+          correctCount={correctCount}
+          totalCount={questions.length}
+          onRetry={handleRetry}
         />
       )}
-
-      {page === "quiz" && (
-        <Quiz onFinish={() => setPage("success")} />
-      )}
-
-      {page === "success" && <Success />}
     </>
   );
-}
+};
 
 export default App;
