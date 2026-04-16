@@ -81,7 +81,7 @@ const Quiz = ({ userName, onFinish }) => {
   });
 
   const mapped = mapQuestion(current);
-
+ console.log("Mapped options:", mapped.options.map(o => o.image));
   // ── Check if question allows multiple answers
   // Questions with marking_type 'partial' or more than 4 options in correct_answers
   // We detect multi-select by checking if question_text contains "(Marks will be awarded only if all answers are right)"

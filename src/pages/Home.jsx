@@ -6,10 +6,66 @@ const rules = [
   {
     icon: (
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2A5EE8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="3" y="3" width="18" height="18" rx="2" /><path d="M9 9h6M9 12h6M9 15h4" />
+      </svg>
+    ),
+    text: "50 questions · 120 marks total · 90 minutes duration.",
+  },
+  {
+    icon: (
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2A5EE8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" />
       </svg>
     ),
-    text: "108 seconds per question — timer resets each time",
+    text: "Each question has its own 108-second timer that resets automatically on every new question.",
+  },
+  {
+    icon: (
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2A5EE8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="12" cy="8" r="4" /><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
+      </svg>
+    ),
+    text: "Topics covered: MCQs, Logical Reasoning, Visual & Spatial Ability, and General Aptitude.",
+  },
+  {
+    icon: (
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2A5EE8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" />
+      </svg>
+    ),
+    text: "Questions on Design Principles & Elements — identify patterns, composition, colour, and visual concepts.",
+  },
+  {
+    icon: (
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2A5EE8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <polygon points="3 11 22 2 13 21 11 13 3 11" />
+      </svg>
+    ),
+    text: "Questions on Monument & Architecture Identification — recognise famous buildings, architects, and styles.",
+  },
+  {
+    icon: (
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2A5EE8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 2L2 7l10 5 10-5-10-5z" /><path d="M2 17l10 5 10-5" /><path d="M2 12l10 5 10-5" />
+      </svg>
+    ),
+    text: "Each question carries 2 or 3 marks as specified alongside the question.",
+  },
+  {
+    icon: (
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2A5EE8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" /><polyline points="22 4 12 14.01 9 11.01" />
+      </svg>
+    ),
+    text: "No negative marking — a wrong or unattempted answer scores zero, nothing is deducted.",
+  },
+  {
+    icon: (
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2A5EE8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <line x1="8" y1="6" x2="21" y2="6" /><line x1="8" y1="12" x2="21" y2="12" /><line x1="8" y1="18" x2="21" y2="18" /><line x1="3" y1="6" x2="3.01" y2="6" /><line x1="3" y1="12" x2="3.01" y2="12" /><line x1="3" y1="18" x2="3.01" y2="18" />
+      </svg>
+    ),
+    text: "All 50 questions are compulsory. Every question must be attempted before submitting.",
   },
   {
     icon: (
@@ -17,7 +73,7 @@ const rules = [
         <polyline points="9 18 15 12 9 6" />
       </svg>
     ),
-    text: "Auto-advances when the timer runs out",
+    text: "If the timer runs out, the quiz auto-advances to the next question with no answer recorded for that question.",
   },
   {
     icon: (
@@ -25,7 +81,7 @@ const rules = [
         <line x1="19" y1="12" x2="5" y2="12" /><polyline points="12 19 5 12 12 5" />
       </svg>
     ),
-    text: "Use the Previous button to revisit any answer",
+    text: "Use the Previous button at any time to go back and change your answer on any earlier question.",
   },
   {
     icon: (
@@ -33,7 +89,7 @@ const rules = [
         <rect x="3" y="3" width="18" height="18" rx="2" /><path d="M9 9h6M9 12h6M9 15h4" />
       </svg>
     ),
-    text: "Some questions include images in the choices",
+    text: "Some questions display images — either as part of the question or as answer choices. Ensure a stable internet connection.",
   },
 ];
 
@@ -90,7 +146,7 @@ const Home = ({ onStart }) => {
             </svg>
           </div>
           <span style={{ fontFamily: "'DM Serif Display', serif", fontSize: "18px", color: "#1C1B18" }}>
-            Quizcraft
+            NATA APTITUDE MOCK TEST 2026 – PART B
           </span>
         </div>
 

@@ -39,19 +39,45 @@ const QuestionCard = ({
         marginBottom: "1.25rem",
       }}
     >
-      {/* Question number */}
-      <p
-        style={{
-          fontSize: "11px",
-          fontWeight: 600,
-          textTransform: "uppercase",
-          letterSpacing: "0.08em",
-          color: "#2A5EE8",
-          marginBottom: "10px",
-        }}
-      >
-        Question {questionNumber}
-      </p>
+     {/* Question number + marks row */}
+<div style={{
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+  marginBottom: "10px",
+}}>
+  <p style={{
+    fontSize: "11px",
+    fontWeight: 600,
+    textTransform: "uppercase",
+    letterSpacing: "0.08em",
+    color: "#2A5EE8",
+    margin: 0,
+  }}>
+    Question {questionNumber}
+  </p>
+
+  <div style={{
+    display: "flex",
+    alignItems: "center",
+    gap: "5px",
+    background: "#F4F3EF",
+    border: "1px solid #ECEAE4",
+    borderRadius: "999px",
+    padding: "3px 10px",
+  }}>
+    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#2A5EE8" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 2l3 6.27L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1L12 2z" />
+    </svg>
+    <span style={{
+      fontSize: "12px",
+      fontWeight: 600,
+      color: "#1C1B18",
+    }}>
+      {question.marks} {question.marks === 1 ? "mark" : "marks"}
+    </span>
+  </div>
+</div>
 
       {/* Question image */}
       {question.image && (
