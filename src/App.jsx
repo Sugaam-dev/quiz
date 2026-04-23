@@ -5,20 +5,16 @@ import Success from "./pages/Success";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
-/**
- * App — top-level state machine
- * Screens: "home" → "quiz" → "success"
- * 
- * userName  — entered on Home page, passed to Quiz to start attempt
- * result    — returned from backend after finishing test
- */
 const App = () => {
-  const [screen, setScreen]   = useState("home");
+  const [screen, setScreen]     = useState("home");
   const [userName, setUserName] = useState("");
-  const [result, setResult]   = useState(null);
+  const [testId, setTestId]     = useState("");
+  const [result, setResult]     = useState(null);
 
-  const handleStart = (name) => {
+  // ← now receives both name AND testId from Home
+  const handleStart = (name, selectedTestId) => {
     setUserName(name);
+    setTestId(selectedTestId);
     setScreen("quiz");
   };
 
@@ -30,6 +26,7 @@ const App = () => {
   const handleRetry = () => {
     setResult(null);
     setUserName("");
+    setTestId("");
     setScreen("home");
   };
 
@@ -39,14 +36,14 @@ const App = () => {
       {screen === "home" && (
         <Home onStart={handleStart} />
       )}
-
       {screen === "quiz" && (
         <Quiz
           userName={userName}
+           
+          testId={testId}         
           onFinish={handleFinish}
         />
       )}
-
       {screen === "success" && (
         <Success
           result={result}
